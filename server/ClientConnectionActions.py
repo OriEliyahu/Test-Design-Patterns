@@ -7,8 +7,8 @@ class ClientConnectionActions():
 
     def __init__(self):
         self.server_socket = self.CreateServerSocket()
-        self.Player1_socket = 0
-        self.Player2_socket = 0
+        self.Player1_socket = 0 # null
+        self.Player2_socket = 0 # null
 
 
     def CreateServerSocket(self):
@@ -18,14 +18,14 @@ class ClientConnectionActions():
         server_socket.listen(1)
         return server_socket
 
-    def ConnectToClients(self):
+    def ConnectToPlayers(self):
         print('Wating for connection ...')
         self.Player1_socket , AddressPlayer1 = self.server_socket.accept()
         self.Player2_socket , AddressPlayer2 = self.server_socket.accept()
         print('Got connection from : ' + str(AddressPlayer1) + " " + str(AddressPlayer2))
 
 
-    def SendToBothClients(self, data):
+    def SendToBothPlayers(self, data):
             self.Player1_socket.send(data.encode('UTF-8'))
             self.Player2_socket.send(data.encode('UTF-8'))
 

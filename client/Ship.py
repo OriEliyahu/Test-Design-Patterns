@@ -1,3 +1,4 @@
+# builder pattern
 class Ship():
     """
     this class will be for ship object in the game.

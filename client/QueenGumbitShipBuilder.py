@@ -1,5 +1,6 @@
 from Ship import Ship
 
+# builder pattern
 class QueenGumbitBuilder():
     """
     dhis class building ship from QueenGumbit type.

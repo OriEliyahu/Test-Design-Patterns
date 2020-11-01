@@ -7,18 +7,19 @@ class GameProccess():
     this class responsible for the game process.
     """
     def __init__(self):
-        self.GamePreparation = SetupGame()
+        self.GamePreparation = 0 # null
         self.ServerConnection = 0 #null
         self.PlayerShipsDict = {}
 
-    def StartGameinit(self):
+    def StartGameinit(self): # initialization the game 
+        self.GamePreparation = SetupGame() # initialization object
         self.GamePreparation.ShowGameBoard()
-        self.GamePreparation.AddShipsPosition()
-        self.PlayerShipsDict = self.GamePreparation.GetPlayerShipDict()
+        self.GamePreparation.AddShipsPosition() #adding here 10 position numbers to player game board
+        self.PlayerShipsDict = self.GamePreparation.GetPlayerShipsDict()
         self.ServerConnection = ServerConnectionActions()
 
     def PlayGame(self):
-        self.WaitForConnection()
+        self.WaitForConnection() # waiting to connection with another player
         
         while self.ServerConnection.ReciveFromServer() != 'STOP':
             GuessingBoardPosition = input('enter number for position guessing: ')
@@ -45,9 +46,9 @@ class GameProccess():
         if EnemyGuessPosition in self.PlayerShipsDict.keys():
             del self.PlayerShipsDict[EnemyGuessPosition]
 
-    def SendStatusGameToServer(self):
+    def SendStatusGameToServer(self): # send if ships dict is empty or not
         if len(self.PlayerShipsDict) == 0:
-            self.ServerConnection.SendToServer('EMPTY')
+            self.ServerConnection.SendToServer('EMPTY') # meaning to ships dict
             print('You Lose')
 
         else:

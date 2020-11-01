@@ -3,24 +3,24 @@ from QueenGumbitShipBuilder import QueenGumbitBuilder
 
 class SetupGame():
     """
-    this class are responsible to create Ships list for the player and init the game.
+    this class are responsible to create Ships list for the player and initialization the game.
     """
     def __init__(self):
         self.Ship = self.CreateShip()
-        self.PlayerShipDict = {}
+        self.PlayerShipsDict = {}
 
-    def CreateShip(self):
+    def CreateShip(self): # using here in builder pattern
         shipbuilder = ShipsBuilder(QueenGumbitBuilder())
         shipbuilder.ConstructShip()
         return shipbuilder.GetShip()
 
-    def AddShipsPosition(self):
-        while len(self.PlayerShipDict) < 10:
+    def AddShipsPosition(self): # adding 10 position numbers on the player board game
+        while len(self.PlayerShipsDict) < 10:
 
             ShipBoardPosition = input("please enter a number for ship position: ")
 
             if self.CheckPositionNumber(ShipBoardPosition): #check if the input is a good number
-                self.PlayerShipDict[ShipBoardPosition] =  self.Ship
+                self.PlayerShipsDict[ShipBoardPosition] =  self.Ship
                 print("Added")
 
             else:
@@ -31,12 +31,12 @@ class SetupGame():
 
         if ShipBoardPosition.isnumeric():
             if int(ShipBoardPosition) > 0 and int(ShipBoardPosition) < 101:
-                if ShipBoardPosition not in self.PlayerShipDict.keys():
+                if ShipBoardPosition not in self.PlayerShipsDict.keys():
                     return True
         return False
 
-    def GetPlayerShipDict(self):
-        return self.PlayerShipDict
+    def GetPlayerShipsDict(self):
+        return self.PlayerShipsDict
 
     def ShowGameBoard(self):
         Row1 = "---------------------------------------------------\n"
@@ -51,7 +51,7 @@ class SetupGame():
         Row10 = "| 81 | 82 | 83 | 84 | 85 | 86 | 87 | 88 | 89 | 90 |\n---------------------------------------------------\n"
         Row11 = "| 91 | 92 | 93 | 94 | 95 | 96 | 97 | 98 | 99 |100 |\n"
         Row12 = "---------------------------------------------------"
-        TotalBoard = Row1+Row2+Row3+Row4+Row5+Row6+Row7+Row8+Row9+Row10+Row11+Row12
-        print('Your Board:\n' + TotalBoard)
+        THE_TOTAL_BOARD = Row1+Row2+Row3+Row4+Row5+Row6+Row7+Row8+Row9+Row10+Row11+Row12
+        print('Your Board:\n' + THE_TOTAL_BOARD)
 
 
